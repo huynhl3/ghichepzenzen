@@ -1,0 +1,24 @@
+#!/bin/bash
+
+echo "-------Check Process-------"
+ps auxf | grep php |grep -Ev "index.php$|lsphp$|wp-[a-z]*.php$|admin-[a-z]*.php$|--"
+sleep 1
+echo "------Count Connections-----"
+netstat -tn 2>/dev/null | grep :80 | awk '{print $5}' | cut -d: -f1 | sort | uniq -c | sort -nr | head
+sleep 1
+echo "-----Top 15 process usage high performance------"
+ps  -eo "user pcpu pmem stime time vsz rssize args" --sort=-pcpu | head -15
+echo "-----Cronjob-----"
+list=`sudo ls /var/spool/cron/`;
+for x in $list;
+do
+        if [ "$x" != "root" ]
+        then
+                cron1=`sudo cat /var/spool/cron/$x | grep '* *'`;
+                if [ -n "$cron1" ]
+                then
+                        domain=`sudo grep $x /etc/domainusers`
+                        echo -e "-----User: $domain\n$cron1";
+                fi
+        fi
+done

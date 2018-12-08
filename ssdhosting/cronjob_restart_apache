@@ -1,0 +1,1 @@
+/1    * timeout 3s curl -I "http://137.59.106.56/cgi-sys/defaultwebpage.cgi" > /dev/null 2>&1 || /usr/bin/systemctl restart httpd

@@ -1,0 +1,1 @@
+grep sasl_username /var/log/zimbra.log | sed 's/.*client=//' | sort | uniq -c | sort -n | cut -d'=' -f3 | sort | uniq -c | sort -n | tail

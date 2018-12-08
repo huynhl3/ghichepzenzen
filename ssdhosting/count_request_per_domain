@@ -1,0 +1,1 @@
+grep -nr '/usr/local/apache/domlogs/' -e "`date +%d/%b/%Y:%H:%M`" | awk {'print $1'} | awk -F ':' {'print $1, $3'} | sort | uniq -c | sort -nr | head

@@ -1,0 +1,1 @@
+for acc in `ls *.tar.gz`; do /scripts/restorepkg --force $acc; account=`echo $acc | cut -d'.' -f1`; ip=`grep $account /tmp/ips.txt | cut -d',' -f2`; /usr/local/cpanel/bin/setsiteip -u $account $ip; echo "$account $ip" >> /tmp/restore.log; done

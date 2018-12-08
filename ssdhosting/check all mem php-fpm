@@ -1,0 +1,1 @@
+ps aux | grep php-fpm | awk '{sum += $6} END {print sum}
